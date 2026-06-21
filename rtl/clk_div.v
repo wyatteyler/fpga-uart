@@ -1,18 +1,24 @@
-module clk_div (
+module clk_div #(
+	parameter CLK_FREQ = 125000000,
+	parameter OUT_FREQ = 59
+) (
 	input clk,
 	input reset,
 	output slow_tick );
+
+	localparam DIVIDER = CLK_FREQ / OUT_FREQ;
+	localparam WIDTH = $clog2(DIVIDER);
 	
-	reg [21:0] count;
+	reg [WIDTH-1:0] count;
 	
 	always @(posedge clk) begin
-		if (reset || count == 22'd2118643) 
-			count <= 22'd0;
+		if (reset || count == DIVIDER - 1) 
+			count <= 0;
 		else 
-			count <= count + 22'd1;			
+			count <= count + 1;			
 		end
 		
-	assign slow_tick = (count == 22'd2118643);
+	assign slow_tick = (count == DIVIDER - 1);
 	
 endmodule
 			
