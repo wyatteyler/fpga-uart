@@ -5,10 +5,9 @@ module uart_tx (
 	input tx_start,				// tx_start is the "go ahead" flag for the start phase and the system to send a byte, in this case it's a button press
 	input [7:0] tx_datain,		// data to be transmitted
 	output reg tx,				// data line where the data will be sent one by one
-	output reg tx_done );		// tx_done is the flag telling the system a full transmission has been completed
+	output reg tx_done );		// tx_done is the flag telling the system a full transmission has been completed, currently used in simulation
 
-	/* these localparams assign binary values to named constants, for use in case statements
-		there is no external signal driving these, internal labels only */
+	/* these localparams assign binary values to named constants, for use in case statements. there is no external signal driving these, internal labels only */
 	
 	localparam IDLE = 2'b00;
 	localparam START = 2'b01;
