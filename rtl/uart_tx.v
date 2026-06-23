@@ -7,10 +7,8 @@ module uart_tx (
 	output reg tx,				// data line where the data will be sent one by one
 	output reg tx_done );		// tx_done is the flag telling the system a full transmission has been completed
 
-	/*
-		these localparams assign binary values to named constants, for use in case statements
-		there is no external signal driving these, internal labels only
-	*/
+	/* these localparams assign binary values to named constants, for use in case statements
+		there is no external signal driving these, internal labels only */
 	
 	localparam IDLE = 2'b00;
 	localparam START = 2'b01;
@@ -33,7 +31,7 @@ module uart_tx (
 			current_state <= next_state;			// when not reset, the current state is set to the next state in line determined by the second always block
 			case (current_state)
 				IDLE: begin							// when the system is IDLE, if tx_start is triggered, the shift register loads the datain value
-					if (tx_start == 1'b1)
+					if (tx_start)
 						shift_reg <= tx_datain;
 				end
 				DATA: begin									// when the system is in DATA state, the shift register shifts right one bit per baud period, outputting the LSB on the tx line
