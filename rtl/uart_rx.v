@@ -78,7 +78,7 @@ module uart_rx (
 				end
 			end
 			STOP: begin
-				if (baud_tick16) begin
+				if (baud_tick16) begin			// wrong
 					oversample_count <= 4'd0;
 				else
 					oversample_count <= oversample_count + 1;
