@@ -1,4 +1,4 @@
-module uart_rx (
+module uart_rx ( 					/////DRAFT/////
 	input clk,
 	input reset,
 	input rx,
